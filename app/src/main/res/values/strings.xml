@@ -3,7 +3,7 @@
     <string name="app_name">LocaleText</string>
 
     <!-- The Help option in the options menu, no more than 30 chars. -->
-    <string name="action_help">يساعد</string>
+    <string name="action_help">Help</string>
 
     <!-- The description includes a parenthetical expression.  -->
     <string name="description">Nougat is a family of confections made with sugar or honey, roasted nuts (almonds, walnuts, pistachios, hazelnuts, and macadamia nuts are common), whipped egg whites, and sometimes chopped candied fruit. It is used in a variety of candy bars and chocolates. </string>
@@ -21,4 +21,7 @@
     <string name="dial_log_message">Can\'t resolve app for ACTION_DIAL Intent.</string>
     <string name="action_language">Language</string>
     <string name="expired_label">Expired Label :</string>
+    <string name="input_price">Price for 1 item :</string>
+    <string name="btn_submit">Submit</string>
+    <string name="tv_price">Price 100 pax :</string>
 </resources>

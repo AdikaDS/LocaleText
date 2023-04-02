@@ -9,20 +9,31 @@ import android.provider.Settings;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.text.DateFormat;
+import java.text.NumberFormat;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends AppCompatActivity {
 
+    EditText mPrice;
+    TextView mTotalPrice;
+    Button mButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        mPrice = findViewById(R.id.input_price);
+        mTotalPrice = findViewById(R.id.tv_total_price);
+        mButton = findViewById(R.id.btn_submit);
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -32,15 +43,28 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        // Menentukan tanggal expired
         Date myDate = new Date();
         long expirationDate = myDate.getTime() + TimeUnit.DAYS.toMillis(5);
         myDate.setTime(expirationDate);
 
         // Kalo mau otomatis dibuat format date dibawah
-        // Tugas Nambah label harga per item (input text), bawahnya button submit, bawahnya label harga per 100 pax disini ana mata uangnya
         String formatDate = DateFormat.getDateInstance().format(myDate);
         TextView expiredTextView = findViewById(R.id.date);
         expiredTextView.setText(formatDate);
+
+        mButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Buat edit text yang berupa string diubah menjadi integer dengan parseInt agar bisa dioperasikan mtk
+                int price = Integer.parseInt(mPrice.getText().toString());
+                int totalPrice = price * 100;
+
+                // Untuk menentukan price sesuai bahasa
+                String formatPrice = NumberFormat.getCurrencyInstance().format(totalPrice);
+                mTotalPrice.setText(formatPrice);
+            }
+        });
     }
 
     /**

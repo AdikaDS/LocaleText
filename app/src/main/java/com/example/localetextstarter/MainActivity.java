@@ -9,8 +9,13 @@ import android.provider.Settings;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import java.text.DateFormat;
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -26,6 +31,16 @@ public class MainActivity extends AppCompatActivity {
                 showHelp();
             }
         });
+
+        Date myDate = new Date();
+        long expirationDate = myDate.getTime() + TimeUnit.DAYS.toMillis(5);
+        myDate.setTime(expirationDate);
+
+        // Kalo mau otomatis dibuat format date dibawah
+        // Tugas Nambah label harga per item (input text), bawahnya button submit, bawahnya label harga per 100 pax disini ana mata uangnya
+        String formatDate = DateFormat.getDateInstance().format(myDate);
+        TextView expiredTextView = findViewById(R.id.date);
+        expiredTextView.setText(formatDate);
     }
 
     /**
@@ -64,6 +79,10 @@ public class MainActivity extends AppCompatActivity {
         if (id == R.id.action_help) {
             Intent intent = new Intent(this, HelpActivity.class);
             startActivity(intent);
+            return true;
+        } else if (id == R.id.action_language) {
+            Intent languageIntent = new Intent (Settings.ACTION_LOCALE_SETTINGS);
+            startActivity(languageIntent);
             return true;
         }
         return super.onOptionsItemSelected(item);
